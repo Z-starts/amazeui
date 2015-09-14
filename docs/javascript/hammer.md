@@ -1,3 +1,13 @@
+---
+id: hammer
+title: 触控事件
+titleEn: Hammer
+prev: javascript/fullscreen.html
+next: javascript/iscroll-lite.html
+source: js/util.hammer.js
+doc: docs/javascript/hammer.md
+---
+
 # Hammer.js
 ---
 
@@ -18,10 +28,10 @@ Hammer 实例存储在 `$(element).data('hammer')` 上。
 
 ### Hammer 对象
 
-可以通过 `$.AMUI.hammer` 访问 `Hammer` 对象。
+可以通过 `$.AMUI.Hammer` 访问 `Hammer` 对象。
 
 ```js
-var Hammer = $.AMUI.hammer;
+var Hammer = $.AMUI.Hammer;
 var hammertime = new Hammer(myElement, myOptions);
 
 hammertime.on('pan', function(e) {

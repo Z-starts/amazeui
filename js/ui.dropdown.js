@@ -140,7 +140,8 @@ Dropdown.prototype.checkDimensions = function() {
     this.$boundary.offset().left : 0;
 
   if (this.$justify) {
-    $dropdown.css({'min-width': this.$justify.width()});
+    // jQuery.fn.width() is really...
+    $dropdown.css({'min-width': this.$justify.css('width')});
   }
 
   if ((width + (offset.left - boundaryOffset)) > boundaryWidth) {
@@ -160,7 +161,10 @@ Dropdown.prototype.events = function() {
   // triggers = this.options.trigger.split(' '),
   var $toggle = this.$toggle;
 
-  $toggle.on('click.' + eventNS, $.proxy(this.toggle, this));
+  $toggle.on('click.' + eventNS, $.proxy(function(e) {
+    e.preventDefault();
+    this.toggle();
+  }, this));
 
   /*for (var i = triggers.length; i--;) {
    var trigger = triggers[i];
@@ -191,25 +195,7 @@ Dropdown.prototype.events = function() {
 };
 
 // Dropdown Plugin
-function Plugin(option) {
-  return this.each(function() {
-    var $this = $(this);
-    var data = $this.data('amui.dropdown');
-    var options = $.extend({},
-      UI.utils.parseOptions($this.attr('data-am-dropdown')),
-      typeof option == 'object' && option);
-
-    if (!data) {
-      $this.data('amui.dropdown', (data = new Dropdown(this, options)));
-    }
-
-    if (typeof option == 'string') {
-      data[option]();
-    }
-  });
-}
-
-$.fn.dropdown = Plugin;
+UI.plugin('dropdown', Dropdown);
 
 // Init code
 UI.ready(function(context) {
@@ -221,9 +207,7 @@ $(document).on('click.dropdown.amui.data-api', '.am-dropdown form',
     e.stopPropagation();
   });
 
-$.AMUI.dropdown = Dropdown;
-
-module.exports = Dropdown;
+module.exports = UI.dropdown = Dropdown;
 
 // TODO: 1. 处理链接 focus
 //       2. 增加 mouseenter / mouseleave 选项

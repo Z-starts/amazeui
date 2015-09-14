@@ -1,8 +1,7 @@
 'use strict';
 
-var $ = require('jquery');
-require('./core');
+var UI = require('../../../js/core');
 
-module.exports = $.AMUI.titlebar = {
-  VERSION: '4.0.0'
+module.exports = UI.titlebar = {
+  VERSION: '4.0.1'
 };

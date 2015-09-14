@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('jquery');
 var UI = require('./core');
 
 /* jshint unused: false */
@@ -961,9 +960,7 @@ IScroll.prototype = {
 
 IScroll.utils = utils;
 
-$.AMUI.IScroll = IScroll;
-
-module.exports = IScroll;
+module.exports = UI.iScroll = IScroll;
 
 /* jshint unused: true */
 /* jshint +W101, +W116, +W109 */

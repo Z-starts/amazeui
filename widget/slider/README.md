@@ -3,6 +3,8 @@
 
 图片轮播模块，更多细节[参见 JS 插件中的介绍](/javascript/slider?_ver=2.x)。
 
+**演示图标版权归[微软 Bing](http://www.bing.com) 所有。**
+
 ## 使用方法
 
 ### 直接使用
@@ -53,6 +55,7 @@ return content;
     {
       "img": "",
       "link": "", // 链接
+      "className": "",
       "thumb": "", // 缩略图
       "desc": "" // 附加信息，支持DOM，为高级定制提供DOM接口
     }
@@ -74,3 +77,23 @@ $(function() {
   });
 });
 ```
+
+## 常见问题
+
+### 在一些浏览器上出现闪退问题？
+
+示例代码中的引号做了**不必要**的 encode，导致解析参数时出错，解决方法是把 `&quot;` 替换成 `"`。**从 2015.05.15 开始，通过 `Copy` 按钮拷贝的代码已经自动替换引号**。
+
+由于 Handlebars.js 的安全机制，暂时无法在显示层面修复。
+
+```html
+<!-- 问题代码 -->
+<div data-am-widget="slider" class="am-slider am-slider-d3" data-am-slider='{&quot;controlNav&quot;:&quot;thumbnails&quot;,&quot;directionNav&quot;:false}'>
+
+<!-- 正确代码 -->
+<div data-am-widget="slider" class="am-slider am-slider-d3" data-am-slider='{"controlNav":"thumbnails","directionNav":false}'>
+```
+
+### 如何设置宽、高？
+
+组件本身不提供设置宽、高的接口，宽度是容器的 `100%`，高度由 slide 里的内容决定。如果需要手动设置宽、高，请通过 CSS 设置容器的宽、高实现。

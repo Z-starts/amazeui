@@ -1,3 +1,11 @@
+---
+id: javaScript
+title: JS 插件
+titleEn: JavaScript
+permalink: javaScript.html
+next: javascript/alert.html
+---
+
 # JavaScript
 ---
 
@@ -18,7 +26,7 @@ jQuery 和 Zepto.js 表面看起来差不多，其实一些细节上差异很大
 #### `width()`/`height()`
 
 - Zepto.js: 由盒模型（`box-sizing`）决定
-- jQery: 忽略盒模型，始终返回内容区域的宽/高（不包含 `padding`、`border`）
+- jQuery: 忽略盒模型，始终返回内容区域的宽/高（不包含 `padding`、`border`）
 
 jQuery [官方的说明](http://api.jquery.com/width/#width)：
 
@@ -102,6 +110,11 @@ $script.on('load', function() {
 
 使用 jQuery 时 `load` 事件的处理函数**不会**执行；使用 Zepto 时 `load` 事件的处理函数**会**执行。
 
+**其他参考链接：**
+
+- [jQuery 市场份额](http://w3techs.com/technologies/overview/javascript_library/all)
+- [jQuery vs Zepto 性能比较](http://jsperf.com/zepto-vs-jquery-2013/82)
+
 ## 高级使用
 
 ### 默认初始化事件接口
@@ -143,17 +156,10 @@ Amaze UI 2.1 中实验性地引入了 `MutationObserver`，**请谨慎使用**�
 在元素上添加 `data-am-observe` 属性以后，动态插入该元素的 Amaze UI JS 插件会自动初始化（[演示](/javascript/scrollspy#mutationobserver?_ver=2.x)），
   支持的插件包括 Button、Dropdown、Slider、Popover、ScrollSpy、Tabs。
 
-#### `$().DOMObserve(callback, config)`
+#### `$().DOMObserve(options, callback)`
 
+- `options`: 监视的属性（[具体参见](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver#MutationObserverInit)），默认为 `{childList: true, subtree: true}`；
 - `callback(mutations, observer)`: DOM 发生变化时的处理函数，第一个参数为存储 [MutationRecord](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver#MutationRecord) 对象的数组，第二个参数为 MutationObserver 实例本身。
-- `config`: 监视的属性（[具体参见](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver#MutationObserverInit)），默认为
-
-```javascript
-{
-  childList: true,
-  subtree: true
-}
-```
 
 `````html
 <p id="js-do-actions">

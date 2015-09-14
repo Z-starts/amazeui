@@ -3,6 +3,9 @@
 
 使用时注意 `<table>` HTML 结构的完整性。
 
+**表格相关 JS 插件：**
+- [jQuery DataTables](https://github.com/amazeui/datatables)
+
 ## 基本样式
 
 添加 `.am-table`。
@@ -258,12 +261,12 @@
   </tr>
   <tr>
     <td class="am-danger">.am-danger</td>
-    <td>橙色高亮</td>
+    <td>红色高亮</td>
     <td>td</td>
   </tr>
   <tr class="am-danger">
     <td>.am-danger</td>
-    <td>橙色高亮</td>
+    <td>红色高亮</td>
     <td>tr</td>
   </tr>
   </tbody>
@@ -317,6 +320,197 @@
 ```html
 <table class="am-table am-table-striped am-table-hover">
 	...
+</table>
+```
+
+## 紧凑型
+
+添加 `.am-table-compact` class，调整 `padding` 显示更紧凑的单元格。
+
+`````html
+<table class="am-table am-table-bordered am-table-striped am-table-compact">
+  <thead>
+  <tr>
+    <th>网站名称</th>
+    <th>网址</th>
+    <th>创建时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr class="am-active">
+    <td>Amaze UI(Active)</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  </tbody>
+</table>
+`````
+
+```html
+<table class="am-table am-table-bordered am-table-striped am-table-compact">
+  <thead>
+  <tr>
+    <th>网站名称</th>
+    <th>网址</th>
+    <th>创建时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr class="am-active">
+    <td>Amaze UI(Active)</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  <tr>
+    <td>Amaze UI</td>
+    <td>http://amazeui.org</td>
+    <td>2012-10-01</td>
+  </tr>
+  </tbody>
+</table>
+```
+
+## 响应式表格
+
+- `.am-text-nowrap`: 禁止文字换行；
+- `.am-scrollable-horizontal`: 内容超出容器宽度时显示水平滚动条。
+
+以上两个 class 在「**辅助类**」中定义。
+
+`````html
+<div class="am-scrollable-horizontal">
+  <table class="am-table am-table-bordered am-table-striped am-text-nowrap">
+    <thead>
+    <tr>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+      <th>-= 表格标题 =-</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+    </tr>
+    <tr>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+    </tr>
+    <tr>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+      <td>表格数据</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+`````
+```html
+<div class="am-scrollable-horizontal">
+  <table class="am-table am-table-bordered am-table-striped am-text-nowrap">
+    ...
+  </table>
+</div>
+```
+
+## 后续更新
+
+### 2.4.x 新增
+
+- `<table>` 上添加 `.am-table-centered` 实现单元格居中对齐
+- 单元格上添加 `.am-text-middle` 可以实现垂直居中，同样，在**单元格**上添加其他文本对齐 class 可以实现想要的效果（参见[辅助类](http://amazeui.org/css/utility?_ver=2.x#wen-ben-zuo-you-dui-qi)）
+
+`````html
+<table class="am-table am-table-bordered am-table-centered">
+  <tr>
+    <th>Savings for holiday!</th>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td rowspan="2" class="am-text-middle">$50</td>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>$80</td>
+  </tr>
+</table>
+`````
+```html
+<table class="am-table am-table-bordered am-table-centered">
+  <tr>
+    <th>Savings for holiday!</th>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td rowspan="2" class="am-text-middle">$50</td>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+  <tr>
+    <td>February</td>
+    <td>$80</td>
+  </tr>
 </table>
 ```
 

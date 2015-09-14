@@ -60,8 +60,24 @@
       }
     }
   }
+
+  // nested Tabs
+  .@{ns}tabs-bd {
+    border: none;
+  }
 }
 
+// fade animation in React version
+.@{ns}tabs-fade {
+  .@{ns}tab-panel {
+    opacity: 0;
+    transition: opacity .25s linear;
+
+    &.@{ns}in {
+      opacity: 1;
+    }
+  }
+}
 
 // HOOKS
 // =============================================================================

@@ -1,16 +1,16 @@
 'use strict';
 
-require('./core');
-require('./ui.collapse');
 var $ = require('jquery');
-var UI = $.AMUI;
+var UI = require('../../../js/core');
+require('../../../js/ui.collapse');
 
 function accordionInit() {
   var $accordion = $('[data-am-widget="accordion"]');
   var selector = {
     item: '.am-accordion-item',
     title: '.am-accordion-title',
-    body: '.am-accordion-bd'
+    body: '.am-accordion-bd',
+    disabled: '.am-disabled'
   };
 
   $accordion.each(function(i, item) {
@@ -22,6 +22,10 @@ function accordionInit() {
       var $parent = $(this).parent(selector.item);
       var data = $collapse.data('amui.collapse');
 
+      if ($parent.is(selector.disabled)) {
+        return;
+      }
+
       $parent.toggleClass('am-active');
 
       if (!data) {
@@ -32,18 +36,16 @@ function accordionInit() {
 
       !options.multiple &&
       $(item).children('.am-active').
-        not($parent).removeClass('am-active').
+        not($parent).not(selector.disabled).removeClass('am-active').
         find(selector.body + '.am-in').collapse('close');
     });
   });
 }
 
 // Init on DOM ready
-$(function() {
-  accordionInit();
-});
+$(accordionInit);
 
-module.exports = $.AMUI.accordion = {
-  VERSION: '2.0.0',
+module.exports = UI.accordion = {
+  VERSION: '2.1.0',
   init: accordionInit
 };
