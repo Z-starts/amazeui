@@ -27,7 +27,7 @@ Popover.DEFAULTS = {
     '<div class="am-popover-inner"></div>' +
     '<div class="am-popover-caret"></div></div>'
 };
-
+var pv_position;
 Popover.prototype.init = function() {
   var me = this;
   var $element = this.$element;
@@ -62,6 +62,7 @@ Popover.prototype.init = function() {
 };
 
 Popover.prototype.sizePopover = function sizePopover() {
+   
   var $element = this.$element;
   var $popover = this.$popover;
 
@@ -87,28 +88,39 @@ Popover.prototype.sizePopover = function sizePopover() {
   var popLeft = 0;
   var diff = 0;
   var spacing = 2;
-  var popPosition = 'top';
-
+  var popPosition;
+  var po_left_or_right;
+  if(typeof(pv_position)=="undefined"){
+     popPosition = 'top';
+  }else{
+     popPosition = pv_position.split(" ")[0];
+     po_left_or_right=pv_position.split(" ")[1];
+  }
+  
   $popover.css({left: '', top: ''}).removeClass('am-popover-left ' +
   'am-popover-right am-popover-top am-popover-bottom');
 
-  $popCaret.css({left: '', top: ''});
+  // $popCaret.css({left: '', top: ''});
+    if(po_left_or_right==='right'||po_left_or_right==='left'){//水平位置的左右，top值
+      // alert(triggerOffset.top);
+      popTop = triggerHeight / 2 + triggerOffset.top - popHeight / 2;
+    }else{//上下，top值
+      if (popTotalHeight - spacing < triggerRect.top + spacing) {
+        // Popover on the top of trigger
+        popTop = triggerOffset.top - popTotalHeight - spacing;
+      } else if (popTotalHeight <
+        winHeight - triggerRect.top - triggerRect.height) {
+        // On bottom
+        popPosition = 'bottom';
+        popTop = triggerOffset.top + triggerHeight + popCaretSize + spacing;
+      } else { // On middle
+        popPosition = 'middle'; 
+        popTop = triggerHeight / 2 + triggerOffset.top - popHeight / 2;
+      }
 
-  if (popTotalHeight - spacing < triggerRect.top + spacing) {
-    // Popover on the top of trigger
-    popTop = triggerOffset.top - popTotalHeight - spacing;
-  } else if (popTotalHeight <
-    winHeight - triggerRect.top - triggerRect.height) {
-    // On bottom
-    popPosition = 'bottom';
-    popTop = triggerOffset.top + triggerHeight + popCaretSize + spacing;
-  } else { // On middle
-    popPosition = 'middle';
-    popTop = triggerHeight / 2 + triggerOffset.top - popHeight / 2;
-  }
-
+    }
   // Horizontal Position
-  if (popPosition === 'top' || popPosition === 'bottom') {
+  if (popPosition === 'top' || popPosition === 'bottom') {//上下left
     popLeft = triggerWidth / 2 + triggerOffset.left - popWidth / 2;
 
     diff = popLeft;
@@ -133,21 +145,28 @@ Popover.prototype.sizePopover = function sizePopover() {
     }
 
     diff = diff - popLeft;
-    $popCaret.css({left: (popWidth / 2 - popCaretSize + diff) + 'px'});
+    // $popCaret.css({left: (popWidth / 2 - popCaretSize + diff) + 'px'});
 
-  } else if (popPosition === 'middle') {
-    popLeft = triggerOffset.left - popWidth - popCaretSize;
-    $popover.addClass('am-popover-left');
-    if (popLeft < 5) {
+  } else if (popPosition === 'middle') {/*middle表示水平方向的左右判断是左还是右*/
+      if(po_left_or_right==='right'){//右left值
+             popLeft = triggerOffset.left + triggerWidth + popCaretSize+3;
+             $popover.removeClass('am-popover-left').addClass('am-popover-right'); 
+      }else{//左left值
+      popLeft = triggerOffset.left - popWidth - popCaretSize-3;
+      $popover.addClass('am-popover-left');
+      }
+   
+    if (popLeft < 5) {//靠屏幕的左边时向右边放置
       popLeft = triggerOffset.left + triggerWidth + popCaretSize;
       $popover.removeClass('am-popover-left').addClass('am-popover-right');
     }
 
-    if (popLeft + popWidth > winWidth) {
+    if (popLeft + popWidth > winWidth) {//靠屏幕的右边
       popLeft = winWidth - popWidth - 5;
       $popover.removeClass('am-popover-left').addClass('am-popover-right');
     }
-    $popCaret.css({top: (popHeight / 2 - popCaretSize / 2) + 'px'});
+
+    // $popCaret.css({top: (popHeight / 2 - popCaretSize / 2) + 'px'});
   }
 
   // Apply position style
